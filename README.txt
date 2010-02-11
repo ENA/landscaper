@@ -38,3 +38,31 @@ jpeglibについて
 個人的に入れたいもの
 ・「マルペケつくろーどっとコム」(http://marupeke296.com/)への謝辞
 ・Thank you for your playing.
+
+
+============
+-staff roll-
+============
+game designer
+	yumeneko
+	seiha
+
+programmer
+	ENA
+
+graphic designer
+	yumeneko
+	ENA
+
+sound producer
+	ENA
+
+debug
+	all TUGC members
+
+special thanks
+	Tokushima Univ. Software Experiment 2009
+
+
+This program is developed by ...
+	TUGC 2009
