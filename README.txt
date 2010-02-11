@@ -66,3 +66,5 @@ special thanks
 
 This program is developed by ...
 	TUGC 2009
+
+Thank you for your playing.
