@@ -329,10 +329,9 @@ namespace space
 			}
 		}
 
-		//画面外で右クリックしたら、キャンセル終了。
-		if(input->mouse.getright().isPush() && pushtime_right==1){
-			Matrix21<int> np=input->mouse.getright().getPushpos();
-			if(winpos.Col_Dot(np)==false){
+		//画面外で右or左クリックしたら、キャンセル終了。
+		if( pushtime_right==1 || pushtime_left==1 ){
+			if(winpos.Col_Dot( input->mouse.getpos() )==false){
 				string_return->resize(0);
 				isNeed = false;
 				systemmain->nowstates.push_back(state_return);
