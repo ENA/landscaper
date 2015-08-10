@@ -19,6 +19,8 @@
 #include<ctime>
 #include<cmath>
 
+#include<random>
+
 #include "setsdl.h"
 #include "graphic.h"
 
@@ -31,12 +33,8 @@ namespace space{
 		t=(x^(x<<11));x=y;y=z;z=w; return( w=(w^(w>>19))^(t^(t>>8)) );
 	}
 	//ゲーム用のrandを置き換え
-	inline int rand(){
-		return ::rand();
-	}
-	inline void srand(unsigned int _s){
-		::srand(_s);
-	}
+	int rand();
+	void srand(unsigned int _s);
 
 	//ポインタキャスト
 	template <class T>
