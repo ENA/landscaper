@@ -28,11 +28,16 @@ namespace space
 		//入力関連
 		//==========
 		const Input *input;
+		bool nexttrig_disabled_flg;
 		unsigned short pushtime_left;
 		unsigned short pushtime_middle;
 		unsigned short pushtime_right;
+		bool pushtrig_left;
+		bool pushtrig_middle;
+		bool pushtrig_right;
 		//key=ボタン番号 , value=押されたフレーム数
 		std::map<unsigned short,unsigned short> pushtime_key;
+		std::set<unsigned short> pushtrig_key;
 		//前のマウス位置
 		Matrix21<int> bmousepos;
 		bool mousemove;
