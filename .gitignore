@@ -11,3 +11,5 @@ Backup/sdl.v11.suo
 sdl.v11.suo
 Debug/
 replay/
+!replay/demo.rep
+Release/

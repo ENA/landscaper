@@ -6,12 +6,10 @@
 #include<vector>
 #include<queue>
 #include<list>
-#include<set>
 #include<iostream>
 #include<fstream>
 #include<sstream>
 #include<string>
-#include<map>
 #include<bitset>
 
 #include<cstdio>
@@ -20,6 +18,8 @@
 #include<cmath>
 
 #include<random>
+#include<unordered_set>
+#include<unordered_map>
 
 #include "setsdl.h"
 #include "graphic.h"

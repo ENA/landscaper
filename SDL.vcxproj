@@ -44,7 +44,7 @@
     <LibraryPath>C:\dev\common\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <IncludePath>C:\dev\common\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\dev\common\lib\x86;$(LibraryPath)</LibraryPath>

@@ -72,14 +72,13 @@ void Title::update(){
 		else pushtime_right = 0;
 		//key
 		const Keyboard::KeyMap &km = ctrinp.keyboard.getkeys();
-		std::map<unsigned short,unsigned short> &now = pushtime_key;
+		std::unordered_map<unsigned short,unsigned short> &now = pushtime_key;
 		//Ø‚é
-		std::map<unsigned short,unsigned short>::iterator nowit = now.begin();
+		std::unordered_map<unsigned short,unsigned short>::iterator nowit = now.begin();
 		for(;nowit!=now.end();nowit++)
 		{
 			if( km.find(nowit->first) == km.end() ){
-			  std::map<unsigned short,unsigned short>::iterator tit = nowit;
-			  nowit--;now.erase(tit);
+			  nowit = now.erase(nowit);
 			  if(nowit==now.end())break;
 			}
 			else { nowit->second++; }
