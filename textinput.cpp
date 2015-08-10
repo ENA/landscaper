@@ -328,6 +328,18 @@ namespace space
 				systemmain->sound_enter.play();
 			}
 		}
+
+		//画面外で右クリックしたら、キャンセル終了。
+		if(input->mouse.getright().isPush() && pushtime_right==1){
+			Matrix21<int> np=input->mouse.getright().getPushpos();
+			if(winpos.Col_Dot(np)==false){
+				string_return->resize(0);
+				isNeed = false;
+				systemmain->nowstates.push_back(state_return);
+				systemmain->sound_cancel.play();
+			}
+		}
+
 	}
 
 	//全部終わったあとに何かあった時の処理

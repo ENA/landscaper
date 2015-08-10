@@ -108,7 +108,6 @@ namespace space
 
 	void ProgramSystemMain::draw()
 	{
-		//これ一行で書けたんかい・・・末恐ろしいC++
 		//draw
 		std::for_each(nowstates.begin(),nowstates.end(),std::mem_fun(&DrawAndUpdate::draw));
 	}
