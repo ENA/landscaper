@@ -1,5 +1,40 @@
-2010/02/11 Landscaper Ver0.0.3.1
-このプログラムは想像を絶するほどに無保証です。
+2015/08/11 Landscaper Ver0.0.3.2
+========================================================
+このプログラムは無保証です。
+
+
+STAFF ROLL
+--------------------------------------------------------
+
+### game designer
+	yumeneko
+	seiha
+### programmer
+	ENA
+### graphic designer
+	yumeneko
+	ENA
+### sound composer
+	ENA
+### debug
+	all TUGC members
+### special thanks
+	Tokushima Univ. Software Experiment 2009
+
+### Finaly...
+This program is developed by ...
+	TUGC 2009
+Thank you for your playing.
+
+
+
+About Licenses(ライセンスについて)
+--------------------------------------------------------
+I'm sorry but this section is Japanese only now...
+I'll fix it.
+
+まとまっておらず申し訳ありませんが以下の通りです。
+いずれ正しく書き換える予定です。
 
 
 libpng,zlib -> zlibライセンス
@@ -38,33 +73,3 @@ jpeglibについて
 個人的に入れたいもの
 ・「マルペケつくろーどっとコム」(http://marupeke296.com/)への謝辞
 ・Thank you for your playing.
-
-
-============
--staff roll-
-============
-game designer
-	yumeneko
-	seiha
-
-programmer
-	ENA
-
-graphic designer
-	yumeneko
-	ENA
-
-sound producer
-	ENA
-
-debug
-	all TUGC members
-
-special thanks
-	Tokushima Univ. Software Experiment 2009
-
-
-This program is developed by ...
-	TUGC 2009
-
-Thank you for your playing.
