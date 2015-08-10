@@ -298,15 +298,16 @@ namespace space
 			BindToGLTexture();
 
 			//頂点を設定
+			GLfloat w_2=static_cast<GLfloat>(_w/2),h_2=static_cast<GLfloat>(_h/2);
 			glBegin(GL_QUADS);
 			glTexCoord2d( 0.0, 1.0);
-			glVertex3f(-_w/2, -_h/2 ,0.0);
+			glVertex3f(-w_2, -h_2 ,0.0);
 			glTexCoord2d( 1.0, 1.0);
-			glVertex3f( _w/2, -_h/2 ,0.0);
+			glVertex3f( w_2, -h_2 ,0.0);
 			glTexCoord2d( 1.0, 0.0);
-			glVertex3f( _w/2,  _h/2 ,0.0);
+			glVertex3f( w_2,  h_2 ,0.0);
 			glTexCoord2d( 0.0, 0.0);
-			glVertex3f(-_w/2,  _h/2 ,0.0);
+			glVertex3f(-w_2,  h_2 ,0.0);
 			glEnd();
 
 			//テクスチャ無効化

@@ -27,7 +27,12 @@ namespace space
 			fieldpos += fieldspd;
 			maincircle.p = fieldpos;
 			formorton.Remove();
-			gamemain->mortontree.Regist(fieldpos.x-maincircle.d,fieldpos.y+maincircle.d,fieldpos.x+maincircle.d,fieldpos.y-maincircle.d,&formorton);
+			gamemain->mortontree.Regist(
+				static_cast<float>( fieldpos.x-maincircle.d ),
+				static_cast<float>( fieldpos.y+maincircle.d ),
+				static_cast<float>( fieldpos.x+maincircle.d ),
+				static_cast<float>( fieldpos.y-maincircle.d ),
+				&formorton);
 	}
 
 	//攻撃する
@@ -42,8 +47,8 @@ namespace space
 		//ダメージ補正
 		//拠点とかで補正が入ったりするのかも
 		//力拠点ボーナス
-		if(player_id>0 && gamemain->player[player_id-1].typeofBase==BASETYPE_POWER)dmg+=std::max(2.0,dmg*0.6);
-		if(src->get_player_id()>0 && gamemain->player[src->get_player_id()-1].typeofBase==BASETYPE_POWER)dmg-=std::max(1.0,dmg*0.12);
+		if(player_id>0 && gamemain->player[player_id-1].typeofBase==BASETYPE_POWER)dmg+=static_cast<int>( std::max(2.0,dmg*0.6) );
+		if(src->get_player_id()>0 && gamemain->player[src->get_player_id()-1].typeofBase==BASETYPE_POWER)dmg-=static_cast<int>( std::max(1.0,dmg*0.12) );
 
 		//最後にこれ
 		dmg = (dmg<=0) ? 1 : dmg;
@@ -90,7 +95,7 @@ namespace space
 			}
 
 			//お金拠点ボーナス	
-			if(player_id>0 && gamemain->player[player_id-1].typeofBase==BASETYPE_MONEY) addmoney+=std::max(1.0,addmoney*0.05);
+			if(player_id>0 && gamemain->player[player_id-1].typeofBase==BASETYPE_MONEY) addmoney+=static_cast<int>( std::max(1.0,addmoney*0.05) );
 			gamemain->player[player_id-1].money += addmoney;
 		}
 	}
@@ -780,7 +785,7 @@ namespace space
 		maincircle.p = fieldpos;
 
 		//愛の拠点ボーナス
-		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum*=1.5;}
+		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum=static_cast<int>(poolnum*1.5);}
 	}
 
 	//出すよ！
@@ -831,7 +836,7 @@ namespace space
 		maincircle.p = fieldpos;
 
 		//愛の拠点ボーナス
-		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum*=1.5;}
+		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum=static_cast<int>(poolnum*1.5);}
 	}
 
 	//2D
@@ -906,7 +911,7 @@ namespace space
 		maincircle.p = fieldpos;
 
 		//愛の拠点ボーナス
-		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum*=1.5;}
+		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum=static_cast<int>(poolnum*1.5);}
 	}
 
 	//2D
@@ -963,7 +968,7 @@ namespace space
 		maincircle.p = fieldpos;
 
 		//愛の拠点ボーナス
-		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum*=1.5;}
+		if(gamemain->player[player_id-1].typeofBase==BASETYPE_LOVE){poolnum=static_cast<int>(poolnum*1.5);}
 	}
 
 	//2D

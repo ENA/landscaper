@@ -1,6 +1,17 @@
 #include "common.h"
 
 namespace space{
+	
+	//ゲーム用randのオブジェクトと実装
+	std::mt19937 *mt=nullptr;
+	std::uniform_int_distribution<int> distr_legacyrand;
+	int rand(void){
+		return distr_legacyrand(*mt);
+	}
+	void srand(unsigned int _s){
+		if(mt!=nullptr){ delete mt; }
+		mt=new std::mt19937(_s);
+	}
 
 	//output font texture
 	void draw_str(const std::string &str)

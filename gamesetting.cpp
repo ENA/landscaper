@@ -1,3 +1,5 @@
+#include <functional>
+
 #include "systemstate.h"
 
 #include "gamemain.h"
@@ -48,8 +50,7 @@ namespace space
 		}
 
 		//変わる先の処理
-		pushtime_key[SDLK_RETURN]=2;
-		pushtime_key[SDLK_q]=2;
+		nexttrig_disabled_flg = true;
 		selectitem = 0;
 		std::ifstream iptxt;
 		char str[30];
@@ -165,6 +166,7 @@ namespace space
 		bmousepos = input->mouse.getpos();
 		return_string = "";
 		afterreturn = false;
+		nexttrig_disabled_flg = false;
 	}
 
 	GameSetting::~GameSetting(){
@@ -310,7 +312,7 @@ namespace space
 			WinRect r;
 			r.x=90; r.y=15; r.w=40; r.h=15;
 			r.x=90+50*selectitem-15;
-			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,127+64+64*sin(counter*M_PI/180.0));
+			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,static_cast<int>(127+64+64*sin(counter*M_PI/180.0)));
 			r.x=90; r.y=15; r.w=30; r.h=15;
 			systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,"OK",systemmain->screen->h);
 			r.x+=r.w+20;
@@ -324,7 +326,7 @@ namespace space
 		else if(state==3){
 			WinRect r;
 			r.x=75; r.y=15; r.w=40; r.h=15;
-			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,127+64+64*sin(counter*M_PI/180.0));
+			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,static_cast<int>(127+64+64*sin(counter*M_PI/180.0)));
 			if(counter%60<47) systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,">",systemmain->screen->h);
 			r.x=90; r.y=15; r.w=30; r.h=15;
 			systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,"OK",systemmain->screen->h);
@@ -371,6 +373,15 @@ namespace space
 		else pushtime_middle = 0;
 		if( ctrinp.mouse.getright().isPush() ) pushtime_right++;
 		else pushtime_right = 0;
+		pushtrig_left = false;
+		pushtrig_middle = false;
+		pushtrig_right = false;
+		if(nexttrig_disabled_flg == false){
+			if( pushtime_left==1 ){ pushtrig_left=true; }
+			if( pushtime_middle==1 ){ pushtrig_middle=true; }
+			if( pushtime_right==1 ){ pushtrig_right=true; }
+		}
+		
 		//前のmousepos
 		if( bmousepos != ctrinp.mouse.getpos() ){
 			bmousepos = ctrinp.mouse.getpos();
@@ -393,12 +404,18 @@ namespace space
 			else { nowit->second++; }
 		}
 		//追加する
+		pushtrig_key.clear();
 		Keyboard::KeyMap::const_iterator kmit = km.begin();
 		for(;kmit!=km.end();kmit++)
 		{
-			if( now.find(kmit->first) == now.end() ) now[kmit->first]=1;
+			if( now.find(kmit->first) == now.end() ){
+				now[kmit->first]=1;
+				if(nexttrig_disabled_flg==false){ pushtrig_key.insert(kmit->first); }
+			}
 		}
 
+		//最後に、trig無効フラグを無効にする
+		nexttrig_disabled_flg = false;
 
 		//===================
 		//設定画面遷移のこと
@@ -406,17 +423,17 @@ namespace space
 		//設定
 		if(state == 0){
 			//上下操作について
-			if( pushtime_key.count(SDLK_DOWN)  && pushtime_key[SDLK_DOWN]==1 ){
+			if( pushtrig_key.count(SDLK_DOWN)==1 ){
 				if(selectitem < 4) selectitem++;
 				systemmain->sound_move.play();
 			}
-			if( pushtime_key.count(SDLK_UP)  && pushtime_key[SDLK_UP]==1 ){
+			if( pushtrig_key.count(SDLK_UP)==1 ){
 				if(selectitem > 0) selectitem--;
 				systemmain->sound_move.play();
 			}
 
 			//左右操作について
-			if(pushtime_key.count(SDLK_LEFT) && pushtime_key[SDLK_LEFT]==1 ){
+			if(pushtrig_key.count(SDLK_LEFT)==1 ){
 				//クライアントサーバー選択
 				if(selectitem == 0){
 					if(player_num > 2) player_num--;
@@ -424,7 +441,7 @@ namespace space
 					
 				}
 			}
-			if( pushtime_key.count(SDLK_RIGHT) && pushtime_key[SDLK_RIGHT]==1){
+			if( pushtrig_key.count(SDLK_RIGHT)==1){
 				if(selectitem == 0){
 					if(player_num < 4) player_num++;
 					systemmain->sound_setting.play();
@@ -432,7 +449,7 @@ namespace space
 			}
 	
 			//ENTERで次へ,クリックでも次へ
-			if( (pushtime_key.count(SDLK_RETURN) && pushtime_key[SDLK_RETURN]==1) || pushtime_left==1){
+			if( pushtrig_key.count(SDLK_RETURN)==1 || pushtrig_left){
 				bool isGone=false;
 				{
 					Matrix21<int> p=input->mouse.getleft().getPushpos();
@@ -466,11 +483,11 @@ namespace space
 					(*std::find(systemmain->nowstates.begin(),systemmain->nowstates.end(),this)) = new StateDummy(systemmain);
 					systemmain->setTextInput(this,"INPUT YOUR NAME",&return_string);
 				}
-				pushtime_key[SDLK_RETURN]=2;
+				nexttrig_disabled_flg = true;
 				systemmain->sound_enter.play();
 			}
 			//q押したらタイトル
-			if( (pushtime_key.count(SDLK_q) && pushtime_key[SDLK_q]==1) || pushtime_right==1){
+			if( pushtrig_key.count(SDLK_q)==1 || pushtrig_right){
 				isNeed = false;
 				systemmain->setTitle();
 				systemmain->sound_cancel.play();
@@ -506,22 +523,22 @@ namespace space
 		//接続確認
 		else if(state == 1){
 			//左右操作について
-			if(pushtime_key.count(SDLK_LEFT) && pushtime_key[SDLK_LEFT]==1 ){
+			if( pushtrig_key.count(SDLK_LEFT)==1 ){
 				if(selectitem > 0) selectitem--;
 				systemmain->sound_move.play();
 			}
-			if( pushtime_key.count(SDLK_RIGHT) && pushtime_key[SDLK_RIGHT]==1){
+			if( pushtrig_key.count(SDLK_RIGHT)==1 ){
 				if(selectitem < 1) selectitem++;
 				systemmain->sound_move.play();
 			}
 
 			//戻る
-			if((pushtime_key.count(SDLK_q) && pushtime_key[SDLK_q]==1) || pushtime_right==1){
+			if( pushtrig_key.count(SDLK_q)==1 || pushtrig_right ){
 				systemmain->sound_cancel.play();
 				setnextstate(0);
 			}
 			//すすむ
-			if((pushtime_key.count(SDLK_RETURN) && pushtime_key[SDLK_RETURN]==1) || pushtime_left==1){
+			if( pushtrig_key.count(SDLK_RETURN)==1 || pushtrig_left){
 				if(selectitem==0){
 					systemmain->sound_enter.play();
 					if(isClient)setnextstate(4);
@@ -568,7 +585,7 @@ namespace space
 			//クライアント数が規定に達すれば、なんかしら全員に送ったりする。
 			if(client_sock.size() + 1 == player_num)
 			{
-				randomseed = time(NULL);
+				randomseed = static_cast<unsigned int>( time(NULL) );
 				my_number = 0;
 				for(unsigned int i=0;i<client_sock.size();i++){
 					//書き込む
@@ -605,7 +622,7 @@ namespace space
 				}
 				
 				//q押したら前の画面に戻ったりする
-				if((pushtime_key.count(SDLK_q) && pushtime_key[SDLK_q]==1) || pushtime_right==1){
+			if( pushtrig_key.count(SDLK_q)==1 || pushtrig_right){
 					setnextstate(0);
 					systemmain->sound_cancel.play();
 				}
@@ -652,7 +669,7 @@ namespace space
 				}
 			}
 			//q押したら前の画面に戻ったりする
-			if( (pushtime_key.count(SDLK_q) && pushtime_key[SDLK_q]==1) || pushtime_right==1 ){
+			if( pushtrig_key.count(SDLK_q)==1 || pushtrig_right){
 				setnextstate(0);
 				systemmain->sound_cancel.play();
 			}
@@ -661,12 +678,12 @@ namespace space
 		else if(state==3){
 			selectitem = 0;
 			//戻る
-			if( (pushtime_key.count(SDLK_RETURN) && pushtime_key[SDLK_RETURN]==1) || pushtime_left==1 ){
+			if( pushtrig_key.count(SDLK_RETURN)==1 || pushtrig_left){
 				setnextstate(0);
 				systemmain->sound_enter.play();
 			}
 			//戻る
-			if((pushtime_key.count(SDLK_q) && pushtime_key[SDLK_q]==1) || pushtime_right==1){
+			if( pushtrig_key.count(SDLK_q)==1 || pushtrig_right){
 				systemmain->sound_cancel.play();
 				setnextstate(0);
 			}

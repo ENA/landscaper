@@ -33,7 +33,7 @@ namespace space
 		}
 
 		void Draw(SDL_Surface *target,
-			unsigned short r,unsigned short g,unsigned short b,unsigned short a,
+			unsigned char r,unsigned char g,unsigned char b,unsigned char a,
 			unsigned int wh=0)
 		{
 			int x1=x; int y1=y; int x2=x+w-1; int y2=y+h-1;

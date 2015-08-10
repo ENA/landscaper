@@ -14,10 +14,12 @@
 #include<map>
 #include<bitset>
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
-#include<math.h>
+#include<cstdio>
+#include<cstdlib>
+#include<ctime>
+#include<cmath>
+
+#include<random>
 
 #include "setsdl.h"
 #include "graphic.h"
@@ -30,6 +32,9 @@ namespace space{
 		unsigned long t;
 		t=(x^(x<<11));x=y;y=z;z=w; return( w=(w^(w>>19))^(t^(t>>8)) );
 	}
+	//ゲーム用のrandを置き換え
+	int rand();
+	void srand(unsigned int _s);
 
 	//ポインタキャスト
 	template <class T>
