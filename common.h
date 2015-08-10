@@ -31,10 +31,10 @@ namespace space{
 		t=(x^(x<<11));x=y;y=z;z=w; return( w=(w^(w>>19))^(t^(t>>8)) );
 	}
 	//ƒQ[ƒ€—p‚Ìrand‚ğ’u‚«Š·‚¦
-	int rand(){
+	inline int rand(){
 		return ::rand();
 	}
-	void srand(unsigned int _s){
+	inline void srand(unsigned int _s){
 		::srand(_s);
 	}
 
