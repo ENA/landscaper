@@ -2,3 +2,10 @@
 *.o
 *.log
 landscaper
+_UpgradeReport_Files/
+UpgradeLog.XML
+UpgradeLog.htm
+sdl.opensdf
+sdl.sdf
+Backup/sdl.v11.suo
+sdl.v11.suo
