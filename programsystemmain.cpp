@@ -1,3 +1,5 @@
+#include <functional>
+
 #include "programsystemmain.h"
 #include "systemstate.h"
 

@@ -1,3 +1,5 @@
+#include <functional>
+
 #include "systemstate.h"
 
 #include "gamemain.h"
