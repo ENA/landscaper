@@ -328,7 +328,7 @@ namespace space
 	private:
 		GLFILETEXS(const GLFILETEXS&); //’è‹`‹ÖŽ~
 
-		typedef std::map<std::string,GLTEXTURE*> STRTEXMAP;
+		typedef std::unordered_map<std::string,GLTEXTURE*> STRTEXMAP;
 		STRTEXMAP graphicrc;
 		GLFILETEXS(){}
 		virtual ~GLFILETEXS(){clear();}
@@ -366,7 +366,7 @@ namespace space
 	private:
 		SDLFILESRFS(const SDLFILESRFS&); //’è‹`‹ÖŽ~
 
-		typedef std::map<std::string,SDLSURFACE*> STRSRFMAP;
+		typedef std::unordered_map<std::string,SDLSURFACE*> STRSRFMAP;
 		STRSRFMAP graphicrc;
 		SDLFILESRFS(){}
 		virtual ~SDLFILESRFS(){clear();}

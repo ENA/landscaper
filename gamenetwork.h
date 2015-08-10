@@ -30,7 +30,7 @@ namespace space{
 			unsigned short pushtime_right;
 		        unsigned short pull_right;
 			//key=ボタン番号 , value=押されたフレーム数
-			std::map<unsigned short,unsigned short> pushtime_key;
+			std::unordered_map<unsigned short,unsigned short> pushtime_key;
 			//放されたキー
 			std::list<unsigned short> pull_key;
 			//マウスの位置が変わった

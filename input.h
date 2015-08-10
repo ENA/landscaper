@@ -11,7 +11,7 @@ namespace space{
 	class Keyboard
 	{
 	public:
-		typedef std::map<unsigned short,unsigned short> KeyMap;
+		typedef std::unordered_map<unsigned short,unsigned short> KeyMap;
 	protected:
 		KeyMap keys;
 	public:

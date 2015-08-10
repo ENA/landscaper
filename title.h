@@ -19,7 +19,7 @@ public:
 	unsigned short pushtime_middle;
 	unsigned short pushtime_right;
 	//key=ボタン番号 , value=押されたフレーム数
-	std::map<unsigned short,unsigned short> pushtime_key;
+	std::unordered_map<unsigned short,unsigned short> pushtime_key;
 
 public:
 	Title(ProgramSystemMain* sys);

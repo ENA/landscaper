@@ -36,8 +36,8 @@ namespace space
 		bool pushtrig_middle;
 		bool pushtrig_right;
 		//key=ボタン番号 , value=押されたフレーム数
-		std::map<unsigned short,unsigned short> pushtime_key;
-		std::set<unsigned short> pushtrig_key;
+		std::unordered_map<unsigned short,unsigned short> pushtime_key;
+		std::unordered_set<unsigned short> pushtrig_key;
 		//前のマウス位置
 		Matrix21<int> bmousepos;
 		bool mousemove;
