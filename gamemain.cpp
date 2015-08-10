@@ -1062,8 +1062,8 @@ namespace space
 			if(counter<140){
 				ra.y = 82*(14-temp);
 				ra.h = 82;
-				r.x += xor128()%(temp+1)-(temp+1)/2;
-				r.y += xor128()%(temp+1)-(temp+1)/2;
+				r.x += static_cast<Sint16>( xor128()%(temp+1)-(temp+1)/2 );
+				r.y += static_cast<Sint16>( xor128()%(temp+1)-(temp+1)/2 );
 				SDLFILESRFS::inst().get("image/areyouready.gif").Draw(systemmain->screen,&r,&ra,systemmain->screen->h);
 			}
 			else if(counter<150){

@@ -312,7 +312,7 @@ namespace space
 			WinRect r;
 			r.x=90; r.y=15; r.w=40; r.h=15;
 			r.x=90+50*selectitem-15;
-			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,127+64+64*sin(counter*M_PI/180.0));
+			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,static_cast<int>(127+64+64*sin(counter*M_PI/180.0)));
 			r.x=90; r.y=15; r.w=30; r.h=15;
 			systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,"OK",systemmain->screen->h);
 			r.x+=r.w+20;
@@ -326,7 +326,7 @@ namespace space
 		else if(state==3){
 			WinRect r;
 			r.x=75; r.y=15; r.w=40; r.h=15;
-			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,127+64+64*sin(counter*M_PI/180.0));
+			boxRGBA(systemmain->screen,r.x,systemmain->screen->h-r.y,r.x+r.w,systemmain->screen->h-r.y-r.h,96,96,192,static_cast<int>(127+64+64*sin(counter*M_PI/180.0)));
 			if(counter%60<47) systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,">",systemmain->screen->h);
 			r.x=90; r.y=15; r.w=30; r.h=15;
 			systemmain->bmpfont.draw(systemmain->screen,r.x,r.y,"OK",systemmain->screen->h);
@@ -570,7 +570,7 @@ namespace space
 			//クライアント数が規定に達すれば、なんかしら全員に送ったりする。
 			if(client_sock.size() + 1 == player_num)
 			{
-				randomseed = time(NULL);
+				randomseed = static_cast<unsigned int>( time(NULL) );
 				my_number = 0;
 				for(unsigned int i=0;i<client_sock.size();i++){
 					//書き込む
