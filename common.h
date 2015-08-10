@@ -14,10 +14,10 @@
 #include<map>
 #include<bitset>
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
-#include<math.h>
+#include<cstdio>
+#include<cstdlib>
+#include<ctime>
+#include<cmath>
 
 #include "setsdl.h"
 #include "graphic.h"
@@ -29,6 +29,13 @@ namespace space{
 		static unsigned long x=123456789,y=362436069,z=521288629,w=(unsigned long)time(NULL);
 		unsigned long t;
 		t=(x^(x<<11));x=y;y=z;z=w; return( w=(w^(w>>19))^(t^(t>>8)) );
+	}
+	//ゲーム用のrandを置き換え
+	int rand(){
+		return ::rand();
+	}
+	void srand(unsigned int _s){
+		::srand(_s);
 	}
 
 	//ポインタキャスト

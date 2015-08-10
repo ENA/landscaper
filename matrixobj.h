@@ -1,8 +1,8 @@
 #ifndef _MATRIXOBJ_H_
 #define _MATRIXOBJ_H_
 
-#include <math.h>
-#include <float.h>
+#include <cmath>
+#include <cfloat>
 
 namespace space
 {
